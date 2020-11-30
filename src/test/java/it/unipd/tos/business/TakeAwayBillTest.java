@@ -61,5 +61,47 @@ public class TakeAwayBillTest {
         
     } 
     
+    @Test
+    public void testCinqueGelati() {
+        List<MenuItem> listinoCinque = new ArrayList<MenuItem>();
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"CocaCola",3));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoVero",5)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoFalso",5)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoSimpatico",5));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoLezzino",5));
+        listinoCinque.add(new MenuItem(ItemType.Budini,"BudinozzoNonSimpatico",5));
+        
+        try {
+            assertEquals(29, testino.getOrderPrice(listinoCinque, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+        
+    }
+    
+    public void testSeiGelati() {
+        List<MenuItem> listinoCinque = new ArrayList<MenuItem>();
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"CocaCola",3));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoVero",5)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoFalso",5)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoSimpatico",5));       
+        listinoCinque.add(new MenuItem(ItemType.Budini,"BudinozzoNonSimpatico",5));
+        
+        try {
+            assertEquals(25, testino.getOrderPrice(listinoCinque, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+        
+    }
+    
     
 }
