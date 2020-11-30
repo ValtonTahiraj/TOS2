@@ -83,6 +83,7 @@ public class TakeAwayBillTest {
         
     }
     
+    @Test
     public void testSeiGelati() {
         List<MenuItem> listinoCinque = new ArrayList<MenuItem>();
         listinoCinque.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
@@ -102,6 +103,49 @@ public class TakeAwayBillTest {
         
         
     }
+    
+    @Test
+    public void testSubtotaleScontoConScontoGelati() {
+        List<MenuItem> listinoCinque = new ArrayList<MenuItem>();
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"Pinguino",20));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"CocaCola",25));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoVero",40)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoFalso",30)); 
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoSimpatico",50));   
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"BudinozzoSimpatico",50));
+        listinoCinque.add(new MenuItem(ItemType.Budini,"BudinozzoNonSimpatico",50));
+        
+        try {
+            assertEquals(229.5, testino.getOrderPrice(listinoCinque, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+        
+    }
+    
+    @Test
+    public void testSubtotaleScontoSenzaScontoGelati() {
+        List<MenuItem> listinoCinque = new ArrayList<MenuItem>();
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"Pinguino",20));
+        listinoCinque.add(new MenuItem(ItemType.Gelati,"CocaCola",25));
+        listinoCinque.add(new MenuItem(ItemType.Budini,"BudinozzoNonSimpatico",50));
+        
+        try {
+            assertEquals(85.5, testino.getOrderPrice(listinoCinque, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+        
+    }
+    
+    
+    
     
     
 }
