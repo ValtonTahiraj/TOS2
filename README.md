@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.com/ValtonTahiraj/TOS2.svg?branch=master)](https://travis-ci.com/ValtonTahiraj/TOS2)
+[![Coverage Status](https://coveralls.io/repos/github/ValtonTahiraj/TOS2/badge.svg?branch=master)](https://coveralls.io/github/ValtonTahiraj/TOS2?branch=master)
