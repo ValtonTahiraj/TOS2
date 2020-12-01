@@ -39,6 +39,15 @@ public class TakeAwayBillImp implements TakeAwayBill {
             totale+=itemsOrdered.get(i).getPrice();   
             
         }
+        
+        
+            
+        return calcoloTotale(numGelati,minimoGelato,subtotal,totale);
+                
+    }
+    
+    private double calcoloTotale(double numGelati,double minimoGelato,
+            double subtotal,double totale) {
         if(numGelati>5) {
             totale=totale-(minimoGelato/2);
         } 
@@ -46,9 +55,14 @@ public class TakeAwayBillImp implements TakeAwayBill {
         if(subtotal>50) {
             totale=totale-(totale*0.1);
         }
-            
+        
+        if(totale!=0){
+            if(totale<10){          
+            totale+=0.5;
+            }
+        }
+        
         return totale;
-                
     }
 
 }

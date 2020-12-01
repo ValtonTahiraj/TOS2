@@ -144,6 +144,42 @@ public class TakeAwayBillTest {
         
     }
     
+    @Test
+    public void testGetOrderPricePenale() {
+        List<MenuItem> listino = new ArrayList<MenuItem>();
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listino.add(new MenuItem(ItemType.Bevande,"CocaCola",2));
+        listino.add(new MenuItem(ItemType.Budini,"BudinozzoVero",5)); 
+
+        try {
+            assertEquals(9.5, testino.getOrderPrice(listino, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+    }
+    
+    @Test
+    public void testGetOrderPricePenaleConSeiGelati() {
+        List<MenuItem> listino = new ArrayList<MenuItem>();
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",1));
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",2));
+        listino.add(new MenuItem(ItemType.Gelati,"Pinguino",1));
+
+        try {
+            assertEquals(10, testino.getOrderPrice(listino, new User("1193389","Rintarou","Okabe",LocalDate.now())),0);
+        } catch (RestaurantBillException e) {
+            // TODO Auto-generated catch block
+            fail("Fallito");
+            
+        }
+        
+    }
     
     
     
