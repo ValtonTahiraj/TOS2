@@ -145,6 +145,16 @@ public class TakeAwayBillTest {
     }
     
     
+    @Test(expected = RestaurantBillException.class)
+    public void testMoreThan30Orders() throws RestaurantBillException{
+        List<MenuItem> list = new ArrayList<MenuItem>();
+        for(int i = 0; i < 40; i++) {
+            list.add(new MenuItem(ItemType.Gelati, "Gelatone", 1));
+        }
+        testino.getOrderPrice(list,new User("1193389","Rintarou","Okabe",LocalDate.now()));
+    }
+    
+    
     
     
     
