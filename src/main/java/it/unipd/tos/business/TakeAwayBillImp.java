@@ -4,7 +4,11 @@
 
 package it.unipd.tos.business;
 
+
+
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Random;
 
 import it.unipd.tos.business.exception.RestaurantBillException;
 import it.unipd.tos.model.ItemType;
@@ -12,8 +16,13 @@ import it.unipd.tos.model.MenuItem;
 import it.unipd.tos.model.User;
 
 public class TakeAwayBillImp implements TakeAwayBill {
+    
+    static int charity=10;
+    static Random seed= new Random(500);
+    
 
-    public double getOrderPrice(List<MenuItem> itemsOrdered, User user) 
+    public double getOrderPrice(List<MenuItem> itemsOrdered, User user, 
+            LocalTime orderPrice) 
             throws RestaurantBillException {
         
         
@@ -44,7 +53,10 @@ public class TakeAwayBillImp implements TakeAwayBill {
             
         }
         
-        
+       
+        if (giveaway(orderPrice, user)) {
+            return 0;
+        }
             
         return calcoloTotale(numGelati,minimoGelato,subtotal,totale);
                 
@@ -68,5 +80,31 @@ public class TakeAwayBillImp implements TakeAwayBill {
         
         return totale;
     }
+    
+    
+    private boolean giveaway(LocalTime orderPrice, User user) {
+
+        if (orderPrice.isAfter(LocalTime.of(17, 59, 59)) && 
+                orderPrice.isBefore(LocalTime.of(19, 00, 01))) {
+            if (user.isUnderAge()) {
+                if (charity > 0) {
+
+                    int x = seed.nextInt() & Integer.MAX_VALUE;
+                    
+
+                    if (x % 100 < 50) {
+                        --charity;
+                        return true;
+                    }
+                }
+            }
+        } else {
+            charity = 10;
+        }
+
+        return false;
+
+    }
+    
 
 }
